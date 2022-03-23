@@ -13,20 +13,29 @@ namespace EncryptionTest_App01
             long p = getPrimeNumber(0);
             long q = getPrimeNumber(p);
 
-            var ehash = Hash(MasterPassword);
-            long e = Convert.ToInt64(ehash, 16);
+            var e = Hash(MasterPassword);
+           // long e = Convert.ToInt64(ehash, 16);
 
-            Console.WriteLine(e);
-            Console.WriteLine(p);
-            Console.WriteLine(q);
+            Console.WriteLine("e: " + e);
+            Console.WriteLine("p: " + p);
+            Console.WriteLine("q: " + q);
 
             Console.ReadLine();
 
         }
         static bool isPrime(long number)
         {
-            if (number % number == 0 && number % 1 == 0)
+            bool isDevided = false;
+            for (int i = 2; i<number && isDevided == false; i++)
             {
+                if (number % i == 0)
+                {
+                    isDevided = true;
+                }
+            }
+            if (number % number == 0 && number % 1 == 0 && isDevided == false)
+            {
+                Console.WriteLine("Primzahl gefunden juhu");
                 return true;
             }
             else
@@ -41,25 +50,31 @@ namespace EncryptionTest_App01
             var characters = "123456789";
             var Charsarr = new char[16];
             var random = new Random();
+            int trys = 1;
 
             while (isPrimeNumber == false)
             {
+                Console.WriteLine("trys: " + trys);
                 for (int i = 0; i < Charsarr.Length; i++)
                 {
                     Charsarr[i] = characters[random.Next(characters.Length)];
                 }
-
+              
                 var resultString = new String(Charsarr);
                 var number = long.Parse(resultString);
-
-                if (isPrime(number))
+                Console.WriteLine(number);
+                
+                if (number%2 == 1)
                 {
-                    if (number != n)
+                    if (isPrime(number))
                     {
-                        return number;
+                        if (number != n)
+                        {
+                            return number;
+                        }
                     }
                 }
-
+                trys++;
             }
             return 0;
         }
