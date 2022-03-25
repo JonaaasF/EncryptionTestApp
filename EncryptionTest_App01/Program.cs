@@ -8,7 +8,7 @@ namespace EncryptionTest_App01
     {
         static void Main(string[] args)
         {
-            String MasterPassword = "JonasF2003";
+            String MasterPassword = "TestPW1234";
 
             long p = getPrimeNumber(0);
             long q = getPrimeNumber(p);
@@ -25,15 +25,16 @@ namespace EncryptionTest_App01
         }
         static bool isPrime(long number)
         {
-            bool isDevided = false;
-            for (int i = 2; i<number && isDevided == false; i++)
+            bool isDivided = false;
+            for (int i = 2; i<number && isDivided == false; i++)
             {
                 if (number % i == 0)
                 {
-                    isDevided = true;
+                    Console.WriteLine("is divisible!");
+                    isDivided = true;
                 }
             }
-            if (number % number == 0 && number % 1 == 0 && isDevided == false)
+            if (number % number == 0 && number % 1 == 0 && isDivided == false)
             {
                 Console.WriteLine("Primzahl gefunden juhu");
                 return true;
@@ -48,13 +49,12 @@ namespace EncryptionTest_App01
         {
             bool isPrimeNumber = false;
             var characters = "123456789";
-            var Charsarr = new char[16];
+            var Charsarr = new char[9];
             var random = new Random();
             int trys = 1;
 
             while (isPrimeNumber == false)
             {
-                Console.WriteLine("trys: " + trys);
                 for (int i = 0; i < Charsarr.Length; i++)
                 {
                     Charsarr[i] = characters[random.Next(characters.Length)];
@@ -62,10 +62,11 @@ namespace EncryptionTest_App01
               
                 var resultString = new String(Charsarr);
                 var number = long.Parse(resultString);
-                Console.WriteLine(number);
-                
+                Console.WriteLine("trys: " + trys);
+
                 if (number%2 == 1)
                 {
+                    Console.WriteLine(number);
                     if (isPrime(number))
                     {
                         if (number != n)
@@ -73,6 +74,10 @@ namespace EncryptionTest_App01
                             return number;
                         }
                     }
+                }
+                else
+                {
+                    Console.WriteLine("is even!");
                 }
                 trys++;
             }
