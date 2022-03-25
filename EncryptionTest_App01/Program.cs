@@ -6,6 +6,7 @@ namespace EncryptionTest_App01
 {
     class Program
     {
+        private static RSACryptoServiceProvider csp = new RSACryptoServiceProvider(4096); 
         static void Main(string[] args)
         {
             String MasterPassword = "TestPW1234";
